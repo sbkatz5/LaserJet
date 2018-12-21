@@ -1,0 +1,304 @@
+run_comment = "Laser Jet Example Simulation"
+log_file    = "lasjet.log"
+basenm      = "lasjet_"
+
+# This particular parfile is used as an example that is described in
+# detail in the users guide.
+
+##########################
+#                        #
+#     I/O PARAMETERS     #
+#                        #
+##########################
+
+### Checkpoint Options  ###
+checkpointFileIntervalTime = 1.0
+checkpointFileIntervalStep = 1000
+
+### Plot Options ###
+plotFileNumber       = 0
+plotFileIntervalStep = 100
+plotFileIntervalTime = 0.01e-09
+plot_var_1           = "dens"
+plot_var_2           = "depo"
+plot_var_3           = "tele"
+plot_var_4           = "tion"
+plot_var_5           = "trad"
+plot_var_6           = "ye  "
+plot_var_7           = "sumy"
+plot_var_8           = "vacu"
+plot_var_9           = "wind"
+
+### Restart Options ###
+restart              = .false.
+checkpointFileNumber = 0
+
+########################################
+#                                      #
+#     RADIATION/OPACITY PARAMETERS     #
+#                                      #
+########################################
+rt_useMGD       = .true.
+rt_mgdNumGroups = 6
+rt_mgdBounds_1  = 1.0e-01
+rt_mgdBounds_2  = 1.0e+00
+rt_mgdBounds_3  = 1.0e+01
+rt_mgdBounds_4  = 1.0e+02
+rt_mgdBounds_5  = 1.0e+03
+rt_mgdBounds_6  = 1.0e+04
+rt_mgdBounds_7  = 1.0e+05
+rt_mgdFlMode    = "fl_harmonic"
+rt_mgdFlCoef    = 1.0
+
+rt_mgdXlBoundaryType = "reflecting"
+rt_mgdXrBoundaryType = "vacuum"
+rt_mgdYlBoundaryType = "vacuum"
+rt_mgdYrBoundaryType = "reflecting"
+rt_mgdZlBoundaryType = "reflecting"
+rt_mgdZrBoundaryType = "reflecting"
+
+useOpacity     = .true.
+
+### SET VACUUM (HELIUM) OPACITY OPTIONS ###
+op_vacuAbsorb   = "op_tabpa"
+op_vacuEmiss    = "op_tabpe"
+op_vacuTrans    = "op_tabro"
+op_vacuFileType = "ionmix4"
+op_vacuFileName = "he-imx-005.cn4"
+
+### SET WINDOW (POLYSTYRENE) OPACITY OPTIONS ###
+op_windAbsorb   = "op_tabpa"
+op_windEmiss    = "op_tabpe"
+op_windTrans    = "op_tabro"
+op_windFileType = "ionmix4"
+op_windFileName = "polystyrene-imx-008.cn4"
+
+### SET WASHER (ALUMINUM) OPACITY OPTIONS ###
+op_washAbsorb   = "op_tabpa"
+op_washEmiss    = "op_tabpe"
+op_washTrans    = "op_tabro"
+op_washFileType = "ionmix4"
+op_washFileName = "al-imx-003.cn4"
+
+
+############################
+#                          #
+#     LASER PARAMETERS     #
+#                          #
+############################
+useEnergyDeposition = .true.
+ed_maxRayCount      = 10000
+ed_gradOrder        = 2
+
+# Activate 3D-in-2D ray trace:
+ed_laser3Din2D           = .true.
+ed_laser3Din2DwedgeAngle = 0.1
+
+
+### LASER IO OPTIONS ###
+ed_useLaserIO                  = .true.
+ed_laserIOMaxNumberOfPositions = 10000
+ed_laserIOMaxNumberOfRays      = 128
+
+### SETUP LASER PULSES ###
+ed_numberOfPulses = 1
+
+# Define Pulse 1:
+ed_numberOfSections_1 = 4
+ed_time_1_1  = 0.0
+ed_time_1_2  = 0.1e-09
+ed_time_1_3  = 1.0e-09
+ed_time_1_4  = 1.1e-09
+
+ed_power_1_1 = 0.0
+ed_power_1_2 = 1.0e+09
+ed_power_1_3 = 1.0e+09
+ed_power_1_4 = 0.0
+
+### SETUP LASER BEAM ###
+ed_numberOfBeams = 1
+
+# Setup Gaussian Beam:
+ed_lensX_1                    =  1000.0e-04
+ed_lensY_1                    =  0.0e-04
+ed_lensZ_1                    = -1000.0e-04
+ed_lensSemiAxisMajor_1        =  10.0e-04
+ed_targetX_1                  =  0.0e-04
+ed_targetY_1                  =  0.0e-04
+ed_targetZ_1                  =  60.0e-04
+ed_targetSemiAxisMajor_1      =  10.0e-04
+ed_targetSemiAxisMinor_1      =  10.0e-04
+ed_pulseNumber_1              =  1
+ed_wavelength_1               =  1.053
+ed_crossSectionFunctionType_1 = "gaussian2D"
+ed_gaussianExponent_1         =  4.0
+ed_gaussianRadiusMajor_1      =  7.5e-04
+ed_gaussianRadiusMinor_1      =  7.5e-04
+ed_numberOfRays_1             =  4096
+ed_gridType_1                 = "radial2D"
+ed_gridnRadialTics_1          =  64
+ed_semiAxisMajorTorsionAngle_1=  0.0
+ed_semiAxisMajorTorsionAxis_1 = "x"
+
+
+#################################
+#                               #
+#     CONDUCTION PARAMETERS     #
+#                               #
+#################################
+useDiffuse      = .true.
+useConductivity = .true.
+diff_useEleCond = .true.
+diff_eleFlMode  = "fl_larsen"
+diff_eleFlCoef  = 0.06
+diff_thetaImplct = 1.0
+
+diff_eleXlBoundaryType = "outflow"
+diff_eleXrBoundaryType = "outflow"
+diff_eleYlBoundaryType = "outflow"
+diff_eleYrBoundaryType = "outflow"
+diff_eleZlBoundaryType = "outflow"
+diff_eleZrBoundaryType = "outflow"
+
+
+####################################
+#                                  #
+#     HEAT EXCHANGE PARAMETERS     #
+#                                  #
+####################################
+useHeatexchange = .true.
+
+
+##########################
+#                        #
+#     EOS PARAMETERS     #
+#                        #
+##########################
+eosModeInit      = "dens_temp_gather"
+smallt           = 1.0
+smallx           = 1.0e-99
+eos_useLogTables = .false.
+
+
+############################
+#                          #
+#     HYDRO PARAMETERS     #
+#                          #
+############################
+useHydro = .true.
+ 
+order            = 3        # Interpolation order (first/second/third/fifth order)
+slopeLimiter     = "minmod" # Slope limiters (minmod, mc, vanLeer, hybrid, limited)
+LimitedSlopeBeta = 1.       # Slope parameter for the "limited" slope by Toro
+charLimiting     = .true.   # Characteristic limiting vs. Primitive limiting
+use_avisc        = .true.   # use artificial viscosity (originally for PPM)
+cvisc            = 0.1      # coefficient for artificial viscosity
+use_flattening   = .false.  # use flattening (dissipative) (originally for PPM)
+use_steepening   = .false.  # use contact steepening (originally for PPM)
+use_upwindTVD    = .false.  # use upwind biased TVD slope for PPM (need nguard=6)
+RiemannSolver    = "hllc"   # Roe, HLL, HLLC, LLF, Marquina, hybrid
+entropy          = .false.  # Entropy fix for the Roe solver
+shockDetect      = .false.  # Shock Detect for numerical stability
+use_hybridOrder  = .true.   # Enforce Riemann density jump
+
+# Hydro boundary conditions:
+xl_boundary_type = "reflect"
+xr_boundary_type = "outflow"
+yl_boundary_type = "outflow"
+yr_boundary_type = "outflow"
+zl_boundary_type = "reflect"
+zr_boundary_type = "reflect"
+
+
+##############################
+#                            #
+#     INITIAL CONDITIONS     #
+#                            #
+##############################
+
+sim_windowRadius = 2.0
+sim_windowHeight = 1.0
+sim_vacuumHeight = 60.0e-04
+
+# Window material defaults set for polystyrene at room temperature:
+sim_windowWidth = 0.25
+sim_windowRad = 1.0
+sim_rhoWind  = 1.04
+sim_teleWind = 290.11375
+sim_tionWind = 290.11375
+sim_tradWind = 290.11375
+ms_windA = 104.1
+# ms_windZ = 13.0
+ms_windZMin = 0.02
+eos_windEosType = "eos_tab"
+eos_windSubType = "ionmix4"
+eos_windTableFile = "polystyrene-imx-008.cn4"
+
+# Vacuum material defaults set for Helium at pressure 1.6 mbar:
+sim_LaserEntry = 0.75
+sim_LaserExit = 0.75
+sim_rhoVacu  = 1.0e-06
+sim_teleVacu = 290.11375
+sim_tionVacu = 290.11375
+sim_tradVacu = 290.11375
+ms_vacuA = 4.002602
+ms_vacuZ = 2.0
+eos_vacuEosType = "eos_tab"
+eos_vacuSubType = "ionmix4"
+eos_vacuTableFile = "he-imx-005.cn4"
+
+# Washer material defaults set for aluminum at room temperature:
+sim_washerWidth = 0.25
+sim_washerOuterRad = 0.5
+sim_washerInnerRad = 1.0
+sim_rhoWash  = 2.7
+sim_teleWash = 290.11375
+sim_tionWash = 290.11375
+sim_tradWash = 290.11375
+ms_washA = 26.9815386
+ms_washZ = 13.0
+ms_washZMin = 0.02
+eos_washEosType = "eos_tab"
+eos_washSubType = "ionmix4"
+eos_washTableFile = "al-imx-003.cn4"
+
+
+###########################
+#                         #
+#     TIME PARAMETERS     #
+#                         #
+###########################
+tstep_change_factor = 1.10
+cfl            = 0.4
+dt_diff_factor = 1.0e+100 # Disable diffusion dt
+rt_dtFactor    = 1.0e+100
+hx_dtFactor    = 1.0e+100
+tmax           = 2.0e-09
+dtmin          = 1.0e-16
+dtinit         = 1.0e-15
+dtmax          = 3.0e-09
+nend           = 10000000
+
+
+###########################
+#                         #
+#     MESH PARAMETERS     #
+#                         #
+###########################
+geometry = "cylindrical"
+
+# Domain size:
+xmin = -1.0
+xmax = 1.0
+ymin = -0.5
+ymax = 0.5
+
+# Total number of blocks:
+nblockx = 1
+nblocky = 2
+
+lrefine_max = 4
+lrefine_min = 1
+refine_var_1 = "dens"
+refine_var_2 = "tele"
+

@@ -1,0 +1,119 @@
+# Coniguration file for LaserSlab simulation
+REQUIRES Driver
+REQUIRES physics/Hydro
+
+USESETUPVARS ThreeT
+
+IF ThreeT
+   REQUESTS physics/Diffuse/DiffuseMain/Unsplit
+
+   REQUESTS physics/sourceTerms/Heatexchange/HeatexchangeMain/Spitzer
+   REQUESTS physics/materialProperties/Conductivity/ConductivityMain/SpitzerHighZ
+ENDIF
+
+# This simulation requires specifying the species via the setup
+# line. You must include the species setup variable:
+#
+# species=vacu,wind
+#
+# An example of a setup line for this simulation is:
+#
+# ./setup -auto LaserJet -2d +hdf5typeio \
+#         -nxb=16 -nyb=16 +mtmmmt +laser species=vacu,wind
+# 
+
+DATAFILES polystyrene-imx-008.cn4
+DATAFILES al-imx-003.cn4
+DATAFILES he-imx-005.cn4
+
+##########################
+#                        #
+#   RUNTIME PARAMETERS   #
+#                        #
+##########################
+
+
+D sim_initGeom Use a spherical window if sphere, default to slab
+PARAMETER sim_initGeom STRING "slab" ["slab","sphere"]
+                              
+D sim_windowRadius The radius to use for the viewing window
+PARAMETER sim_windowRadius REAL 2.0
+
+D sim_windowHeight The height of the viewing window off y-axis
+PARAMETER sim_windowHeight REAL 1.0
+
+# Window material defaults set for polystyrene:
+D sim_windowWidth The thickness/width of the window material
+PARAMETER sim_windowWidth REAL 0.25
+
+D sim_windowRad The height/radius of the window material
+PARAMETER sim_windowRad REAL 1.0
+
+D sim_rhoWind Initial window density
+PARAMETER sim_rhoWind   REAL 1.04
+
+D sim_teleWind Initial window electron temperature
+PARAMETER sim_teleWind  REAL 290.11375
+
+D sim_tionWind Initial window ion temperature
+PARAMETER sim_tionWind  REAL 290.11375
+
+D sim_tradWind Initial window radiation temperature
+PARAMETER sim_tradWind  REAL 290.11375
+
+D sim_zminWind window minimum zbar allowed
+PARAMETER sim_zminWind  REAL 0.0
+
+D sim_eosWind window EOS type
+PARAMETER sim_eosWind   STRING "eos_tab" ["eos_tab","eos_gam"]
+
+# Vacuum material defaults set for Helium at pressure 1.6 mbar:
+D sim_LaserEntry The thickness of the vacuum region in front of the window
+PARAMETER sim_LaserEntry REAL 0.75
+
+D sim_LaserExit The thickness of vacuum region for jet
+PARAMETER sim_LaserExit  REAL 0.75
+
+D sim_rhoVacu Initial vacuum density
+PARAMETER sim_rhoVacu   REAL 2.655e-07
+
+D sim_teleVacu Initial vacuum electron temperature
+PARAMETER sim_teleVacu  REAL 290.11375
+
+D sim_tionVacu Initial vacuum ion temperature
+PARAMETER sim_tionVacu  REAL 290.11375
+
+D sim_tradVacu Initial vacuum radiation temperature
+PARAMETER sim_tradVacu  REAL 290.11375
+
+D sim_eosVacu vacuum EOS type
+PARAMETER sim_eosVacu   STRING "eos_tab" ["eos_tab","eos_gam"]
+
+# Washer material defaults set for aluminum at room temperature:
+D sim_washerWidth The thickness/width of the washer 
+PARAMETER sim_washerWidth REAL 0.25
+
+D sim_washerOuterRad The outer radius of the washer
+PARAMETER sim_washerOuterRad REAL 0.5
+
+D sim_washerInnerRad The inner radius of the washer
+PARAMETER sim_washerInnerRad REAL 0.25
+
+D sim_rhoWash Initial washer density
+PARAMETER sim_rhoWash   REAL 2.7
+
+D sim_teleWash Initial washer electron temperature
+PARAMETER sim_teleWash  REAL 290.11375
+
+D sim_tionWash Initial washer ion temperature
+PARAMETER sim_tionWash  REAL 290.11375
+
+D sim_tradWash Initial washer radiation temperature
+PARAMETER sim_tradWash  REAL 290.11375
+
+D sim_zminWash washer minimum zbar allowed
+PARAMETER sim_zminWash  REAL 0.0
+
+D sim_eosWash washer EOS type
+PARAMETER sim_eosWash   STRING "eos_tab" ["eos_tab","eos_gam"]
+
